@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>ABA Smart Note Generator</title> <script src="https://cdn.tailwindcss.com"></script> <style> .loader { border-top-color: #3498db; animation: spinner 1.5s linear infinite; } @keyframes spinner { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } } </style> </head> <body class="bg-gray-50 min-h-screen p-4 md:p-8"> <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden"> <div class="p-8"> <h1 class="text-2xl font-bold text-gray-800 mb-6">ABA Session Note Automation</h1>
+
+        <div id="setup-view">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Paste Therapy Goals (one per line)</label>
+            <textarea id="goal-input" rows="6" class="w-full border p-3 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" placeholder="1. Eye Contact&#10;2. Transitioning between activities&#10;3. Requesting items..."></textarea>
+            <button onclick="initializeSession()" class="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">Start Session</button>
+        </div>
+
+        <div id="session-view" class="hidden">
+            <div class="space-y-6">
+                <section>
+                    <h2 class="text-lg font-semibold border-b pb-2 mb-4">Goal Progress</h2>
+                    <div id="goal-checklist" class="space-y-4"></div>
+                </section>
+
+                <section class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <h3 class="font-medium text-gray-700">Engagement</h3>
+                        <select id="engagement" class="w-full border p-2 rounded mt-1">
+                            <option>Active & Cooperative</option>
+                            <option>Neutral/Varied</option>
+                            <option>Resistant/Distracted</option>
+                        </select>
+                    </div>
+                    <div>
+                        <h3 class="font-medium text-gray-700">Prompting Level</h3>
+                        <select id="prompting" class="w-full border p-2 rounded mt-1">
+                            <option>Independent</option>
+                            <option>Gestural/Verbal</option>
+                            <option>Physical Prompting</option>
+                        </select>
+                    </div>
+                </section>
+
+                <button onclick="generateNote()" id="gen-btn" class="w-full bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-700">Generate Professional Note</button>
+            </div>
+        </div>
+
+        <div id="result-view" class="hidden mt-8">
+            <h2 class="text-lg font-semibold mb-2">Generated Session Note</h2>
+            <div id="note-output" class="bg-gray-100 p-4 rounded-lg whitespace-pre-wrap text-sm text-gray-800 border min-h-[300px]" contenteditable="true"></div>
+            <div class="flex gap-4 mt-4">
+                <button onclick="copyToClipboard()" class="bg-gray-800 text-white px-4 py-2 rounded">Copy to Clipboard</button>
+                <button onclick="window.print()" class="bg-blue-600 text-white px-4 py-2 rounded">Export to PDF</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+
+
+</body> </html>
